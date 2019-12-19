@@ -39,7 +39,7 @@ double Planck_nu1_nu2(const double T, const double nu1, const double nu2, const 
 
 DiskGR::DiskGR(double kerr):
 		kerr{kerr},
-		x0{std::sqrt(rISCORg(kerr)},
+		x0{std::sqrt(rISCORg(kerr))},
 		x1{2. * std::cos ((std::acos(ak)-M_PI)/3.)},
 		x2{2. * std::cos ((std::acos(ak)+M_PI)/3.)},
 		x3{-2. * std::cos (std::acos(ak)/3.)},
