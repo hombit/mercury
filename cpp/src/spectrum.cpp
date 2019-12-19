@@ -37,6 +37,26 @@ double Planck_nu1_nu2(const double T, const double nu1, const double nu2, const 
 	return integral;
 }
 
+DiskGR::DiskGR(double kerr):
+		kerr(kerr),
+		x0(std::sqrt(rISCORg(kerr)),
+		x1(2. * std::cos ((std::acos(ak)-M_PI)/3.)),
+		x2(2. * std::cos ((std::acos(ak)+M_PI)/3.)),
+		x3(-2. * std::cos (std::acos(ak)/3.)),
+		a0(3. * (x1-ak)*(x1-ak) / (x1*(x1-x2)*(x1-x3))),
+		a1(std::log(x0-x1)),
+		b0(3. * (x2-ak)*(x2-ak) / (x2*(x2-x1)*(x2-x3))),
+		b1(std::log(x0-x2)),
+		c0(3. * (x3-ak)*(x3-ak) / (x3*(x3-x1)*(x3-x2))),
+		c1(std::log(x0-x3)) {}
+
+double DiskGR::T(const double r, const double Mx, const double Mdot) {
+	 return std::pow(
+			(3.*Mdot * m::pow<6>(GSL_CONST_CGSM_SPEED_OF_LIGHT) / (8.*M_PI * m::pow<2>(GSL_CONST_CGSM_GRAVITATIONAL_CONSTANT * Mx))) *
+			(x - x0 - 1.5 * kerr * std::log(x/x0) - a(x) - b(x) - c(x)) / ( m::pow<4>(x)*(m::pow<3>(x) - 3.*x + 2. * kerr) ) /
+			GSL_CONST_CGSM_STEFAN_BOLTZMANN_CONSTANT,
+			0.25);
+}
 
 // Code by Galina Lipunova:
 /* General Relativity effects are included in the structure of the disk
