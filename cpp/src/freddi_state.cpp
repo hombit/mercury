@@ -290,8 +290,7 @@ const vecd& FreddiState::Tph_X() {
 		vecd x(Nx());
 		x[first()] = 0;
 		for (size_t i = first() + 1; i <= last(); i++) {
-			x[i] = (args().flux->colourfactor * Spectrum::T_GR(R()[i], args().basic->kerr, args().basic->Mx,
-					F()[i] / (h()[i] - h()[first()]), R()[first()]));
+			x[i] = (args().flux->colourfactor * Spectrum::T_GR(R()[i], args().basic->kerr, args().basic->Mx, F()[i] / (h()[i] - h()[first()])));
 		}
 		opt_str_.Tph_X = std::move(x);
 	}
