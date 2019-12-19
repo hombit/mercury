@@ -51,7 +51,8 @@ DiskGR::DiskGR(double kerr):
 		c1(std::log(x0-x3)) {}
 
 double DiskGR::T(const double r, const double Mx, const double Mdot) const {
-	 return std::pow(
+	const double x = std::sqrt(cmToRg(r, Mx));
+	return std::pow(
 			(3.*Mdot * m::pow<6>(GSL_CONST_CGSM_SPEED_OF_LIGHT) / (8.*M_PI * m::pow<2>(GSL_CONST_CGSM_GRAVITATIONAL_CONSTANT * Mx))) *
 			(x - x0 - 1.5 * kerr * std::log(x/x0) - a(x) - b(x) - c(x)) / ( m::pow<4>(x)*(m::pow<3>(x) - 3.*x + 2. * kerr) ) /
 			GSL_CONST_CGSM_STEFAN_BOLTZMANN_CONSTANT,
