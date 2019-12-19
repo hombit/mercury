@@ -34,9 +34,9 @@ private:
     const double b1;
     const double c0;
     const double c1;
-    inline double a(x) { return a0 * (std::log(x-x1) - a1); }
-    inline double b(x) { return b0 * (std::log(x-x2) - b1); }
-    inline double c(x) { return c0 * (std::log(x-x3) - c1); }
+    inline double a(const double x) { return a0 * (std::log(x-x1) - a1); }
+    inline double b(const double x) { return b0 * (std::log(x-x2) - b1); }
+    inline double c(const double x) { return c0 * (std::log(x-x3) - c1); }
 public:
     DiskGR(double kerr);
     double T(double r, double Mx, double Mdot);
