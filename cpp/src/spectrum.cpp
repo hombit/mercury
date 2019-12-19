@@ -38,17 +38,17 @@ double Planck_nu1_nu2(const double T, const double nu1, const double nu2, const 
 }
 
 DiskGR::DiskGR(double kerr):
-		kerr{kerr},
-		x0{std::sqrt(rISCORg(kerr))},
-		x1{2. * std::cos ((std::acos(ak)-M_PI)/3.)},
-		x2{2. * std::cos ((std::acos(ak)+M_PI)/3.)},
-		x3{-2. * std::cos (std::acos(ak)/3.)},
-		a0{3. * (x1-ak)*(x1-ak) / (x1*(x1-x2)*(x1-x3))},
-		a1{std::log(x0-x1)},
-		b0{3. * (x2-ak)*(x2-ak) / (x2*(x2-x1)*(x2-x3))},
-		b1{std::log(x0-x2)},
-		c0{3. * (x3-ak)*(x3-ak) / (x3*(x3-x1)*(x3-x2))},
-		c1{std::log(x0-x3)} {}
+		kerr(kerr),
+		x0(std::sqrt(rISCORg(kerr))),
+		x1(2. * std::cos ((std::acos(kerr)-M_PI)/3.)),
+		x2(2. * std::cos ((std::acos(kerr)+M_PI)/3.)),
+		x3(-2. * std::cos (std::acos(kerr)/3.)),
+		a0(3. * m::pow<2>(x1-kerr) / (x1*(x1-x2)*(x1-x3))),
+		a1(std::log(x0-x1)),
+		b0(3. * m::pow<2>(x2-kerr) / (x2*(x2-x1)*(x2-x3))),
+		b1(std::log(x0-x2)),
+		c0(3. * m::pow<2>(x3-kerr) / (x3*(x3-x1)*(x3-x2))),
+		c1(std::log(x0-x3)) {}
 
 double DiskGR::T(const double r, const double Mx, const double Mdot) {
 	 return std::pow(
