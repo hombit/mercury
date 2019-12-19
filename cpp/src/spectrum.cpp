@@ -62,7 +62,7 @@ double DiskGR::T(const double r, const double Mx, const double Mdot) {
 /* General Relativity effects are included in the structure of the disk
    (Page & Thorne 1974; Riffert & Herold 1995). metric = "GR"
 */
-double T_GR(const double r1, const double ak, const double Mx, const double Mdot){
+double T_GR(const double r1, const double ak, const double Mx, const double Mdot) const {
 	const double x = std::sqrt(cmToRg(r1, Mx));
 	const double x0 = std::sqrt(rISCORg(ak));
 	

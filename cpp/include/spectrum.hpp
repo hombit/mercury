@@ -39,8 +39,8 @@ private:
     inline double c(const double x) { return c0 * (std::log(x-x3) - c1); }
 public:
     DiskGR(double kerr);
-    double T(double r, double Mx, double Mdot);
-}
+    double T(double r, double Mx, double Mdot) const;
+};
 
 double T_GR(double r1, double ak, double Mx, double Mdot);
 } // namespace Spectrum
