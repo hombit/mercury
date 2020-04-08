@@ -171,6 +171,7 @@ double FreddiNeutronStarEvolution::Romanova2018NSMdotFraction::operator()(double
 	if (fastness >= 1) {
 		_fp = par1 * std::pow(fastness, par2);
 	}
+	// Do not allow accretion rate to be negative
 	if (_fp > 1) {
 		_fp = 1.;
 	}
