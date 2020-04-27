@@ -16,7 +16,11 @@ namespace m = boost::math;
 
 typedef std::valarray<double> vald;
 typedef std::vector<double> vecd;
+
 typedef std::map<std::string, double> pard;
+namespace std {
+ostream &operator<<(ostream &os, const pard &m);
+}
 
 double trapz(const vecd& x, const vecd& y, size_t first, size_t last);
 double trapz(const vecd& x, const std::function<double (size_t)>& f, size_t first, size_t last);

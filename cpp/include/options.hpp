@@ -89,6 +89,9 @@ std::optional<T> varToOpt(const po::variables_map& vm, const std::string& name) 
 pard multitoken_string_option_to_map(const po::variables_map& vm, const std::string& name,
 		const std::string& separators, const pard& default_value);
 
+namespace std {
+void validate(boost::any &v, const std::vector<std::string> &values, pard *target_type, long);
+}
 
 template <typename Options>
 bool parseOptions(po::variables_map& vm, int ac, char* av[]) {

@@ -294,3 +294,27 @@ pard multitoken_string_option_to_map(const po::variables_map& vm, const std::str
 	}
 	return m;
 }
+
+namespace std {
+void validate(boost::any &v, const std::vector<std::string> &values, pard *target_type, long) {
+	pard m;
+	for (const auto &value : values) {
+		std::vector<std::string> parts;
+		boost::split(parts, value, boost::is_any_of(":"));
+		if (parts.size() != 2) {
+			throw po::validation_error(po::validation_error::invalid_option_value);
+		}
+		m[parts[0]] = std::stod(parts[1]);
+	}
+
+	if (v.empty()) {
+		v = boost::any(m);
+	} else {
+		auto &mv = boost::any_cast<pard &>(v);
+		for (const auto &pair : m) {
+			mv.insert(pair);  // doesn't override existing value
+		}
+	}
+	cerr << boost::any_cast<const pard &>(v);
+}
+}

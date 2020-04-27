@@ -6,6 +6,22 @@
 
 namespace bm = boost::math;
 
+namespace std{
+ostream& operator<<(ostream& os, const pard& m) {
+	if (m.empty()) {
+		os << "{}";
+		return os;
+	}
+	auto it = m.cbegin();
+	os << "{" << it->first << ":" << it->second;
+	for (++it; it != m.cend(); ++it) {
+		os << ", " << it->first << ":" << it->second;
+	}
+	os << "}";
+	return os;
+}
+}
+
 double trapz(const vecd& x, const vecd& y, const size_t first, const size_t last) {
 	if (first >= last) {
 		return 0.;
