@@ -4,7 +4,11 @@ on: [push, pull_request]
 
 jobs:
   gcc:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, self-hosted]
 
     container:
       image: opensuse/tumbleweed
