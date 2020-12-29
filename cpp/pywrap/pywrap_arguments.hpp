@@ -17,7 +17,7 @@ void wrap_arguments();
 boost::shared_ptr<GeneralArguments> make_general_arguments();
 
 boost::shared_ptr<BasicDiskBinaryArguments> make_basic_disk_binary_arguments(
-		double alpha,
+		double alpha, const object& alphacold,
 		double Mx, double kerr,
 		double period,
 		double Mopt, double roche_lobe_fill, double Topt,
@@ -27,7 +27,7 @@ boost::shared_ptr<DiskStructureArguments> make_disk_structure_arguments(
 		const BasicDiskBinaryArguments& basic_disk_binary_arguments,
 		const std::string& opacity,
 		double Mdotout,
-		const std::string& boundcond, double Thot,
+		const std::string& boundcond, double Thot, double Tirr2Tvishot,
 		const std::string& initialcond,
 		const object& F0, const object& Mdisk0, const object& Mdot0,
 		const object& powerorder, const object& gaussmu, const object& gausssigma,
@@ -68,7 +68,7 @@ boost::shared_ptr<NeutronStarArguments> make_neutron_star_arguments(
 
 boost::shared_ptr<NeutronStarBasicDiskBinaryArguments> make_neutron_star_basic_disk_binary_arguments(
 		const NeutronStarArguments& ns_args,
-		double alpha,
+		double alpha, const object& alphacold,
 		double Mx, double kerr,
 		double period,
 		double Mopt, double roche_lobe_fill, double Topt,

@@ -35,6 +35,7 @@ dict evolution_kwdefaults() {
 
 	kw["__cgs"] = true;
 
+	kw["alphacold"] = object();
 	kw["kerr"] = BasicDiskBinaryArguments::default_kerr;
 	kw["rochelobefill"] = BasicDiskBinaryArguments::default_roche_lobe_fill;
 	kw["Topt"] = BasicDiskBinaryArguments::default_Topt;
@@ -47,6 +48,7 @@ dict evolution_kwdefaults() {
 	kw["boundcond"] = DiskStructureArguments::default_boundcond;
 	kw["initialcond"] = DiskStructureArguments::default_initialcond;
 	kw["Thot"] = DiskStructureArguments::default_Thot;
+	kw["Qirr2Qvishot"] = m::pow<4>(DiskStructureArguments::default_Tirr2Tvishot);
 	kw["F0"] = object();
 	kw["Mdisk0"] = object();
 	kw["Mdot0"] = object();
@@ -133,7 +135,7 @@ boost::shared_ptr<FreddiArguments> make_freddi_arguments(dict& kw) {
 
 	const auto general = make_general_arguments();
 	const auto basic = make_basic_disk_binary_arguments(
-			extract<double>(kw["alpha"]),
+			extract<double>(kw["alpha"]), kw["alphacold"],
 			extract<double>(kw["Mx"]), extract<double>(kw["kerr"]),
 			extract<double>(kw["period"]),
 			extract<double>(kw["Mopt"]), extract<double>(kw["rochelobefill"]), extract<double>(kw["Topt"]),
@@ -143,6 +145,7 @@ boost::shared_ptr<FreddiArguments> make_freddi_arguments(dict& kw) {
 			extract<std::string>(kw["opacity"]),
 			extract<double>(kw["Mdotout"]),
 			extract<std::string>(kw["boundcond"]), extract<double>(kw["Thot"]),
+			std::pow(extract<double>(kw["Qirr2Qvishot"]), 0.25),
 			extract<std::string>(kw["initialcond"]),
 			kw["F0"], kw["Mdisk0"], kw["Mdot0"],
 			kw["powerorder"], kw["gaussmu"], kw["gausssigma"],
@@ -233,7 +236,7 @@ boost::shared_ptr<FreddiNeutronStarArguments> make_freddi_neutron_star_arguments
 	const auto general = make_general_arguments();
 	const auto basic = make_neutron_star_basic_disk_binary_arguments(
 			*ns_args,
-			extract<double>(kw["alpha"]),
+			extract<double>(kw["alpha"]), kw["alphacold"],
 			extract<double>(kw["Mx"]), extract<double>(kw["kerr"]),
 			extract<double>(kw["period"]),
 			extract<double>(kw["Mopt"]), extract<double>(kw["rochelobefill"]), extract<double>(kw["Topt"]),
@@ -243,6 +246,7 @@ boost::shared_ptr<FreddiNeutronStarArguments> make_freddi_neutron_star_arguments
 			extract<std::string>(kw["opacity"]),
 			extract<double>(kw["Mdotout"]),
 			extract<std::string>(kw["boundcond"]), extract<double>(kw["Thot"]),
+			std::pow(extract<double>(kw["Qirr2Qvishot"]), 0.25),
 			extract<std::string>(kw["initialcond"]),
 			kw["F0"], kw["Mdisk0"], kw["Mdot0"],
 			kw["powerorder"], kw["gaussmu"], kw["gausssigma"],

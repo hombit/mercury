@@ -12,6 +12,7 @@ constexpr const char GeneralArguments::default_dir[];
 constexpr const unsigned short GeneralArguments::default_output_precision;
 
 
+constexpr const double BasicDiskBinaryArguments::default_alpha_to_alphacold;
 constexpr const double BasicDiskBinaryArguments::default_kerr;
 constexpr const double BasicDiskBinaryArguments::default_roche_lobe_fill;
 constexpr const double BasicDiskBinaryArguments::default_Topt;
@@ -29,7 +30,7 @@ DiskStructureArguments::DiskStructureArguments(
 		const BasicDiskBinaryArguments &bdb_args,
 		const std::string& opacity,
 		double Mdotout,
-		const std::string& boundcond, double Thot,
+		const std::string& boundcond, double Thot, double Tirr2Tvishot,
 		const std::string& initialcond,
 		std::optional<double> F0,
 		std::optional<double> Mdisk0, std::optional<double> Mdot0,
@@ -42,6 +43,7 @@ DiskStructureArguments::DiskStructureArguments(
 		Mdotout(Mdotout),
 		boundcond(boundcond),
 		Thot(Thot),
+		Tirr2Tvishot(Tirr2Tvishot),
 		initialcond(initialcond),
 		initial_F_function(),
 		wind(wind),
